@@ -7,25 +7,23 @@ let myStars = [];
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  translate(width / 2, height / 2);
   rectMode(CENTER);
 
   //Generazione di Stelle
-  for (let i = 0; i < 120; i++) {
-    const aNewStars = new Star(
+  for (let i = 0; i < 150; i++) {
+    const newStar = new Star(
       random(width),
       random(height),
       random(0.3, 3),
-      random(TWO_PI),
-      random(starColor)
+      random(TWO_PI)
     );
-    myStars.push(aNewStars);
+    myStars.push(newStar);
   }
 }
 
 function draw() {
   background(bg);
-  //Rettangoli di gradiente sfondo
+  //Gradiente sfondo
   push();
   translate(width / 2, height / 2);
   noStroke();
@@ -34,14 +32,19 @@ function draw() {
   drawingContext.filter = "blur(300px)";
   rect(width / 3, height / 3, 1000, 1000);
   pop();
+
   //Generazione di stelle
+  push();
   for (let i = 0; i < myStars.length; i++) {
     myStars[i].display();
   }
+  pop();
+
   //Nuvole
   push();
   drawClouds();
   pop();
+
   //Rettangolo del testo
   push();
   noFill();
@@ -49,7 +52,9 @@ function draw() {
   strokeWeight(2);
   rect(width / 2, height / 2 - 5, 200, 70);
   pop();
+
   //Scritta
+  push();
   let myText = "Click to chage the SKY.";
   textFont("Agency FB");
   textStyle(ITALIC);
@@ -78,7 +83,7 @@ class Star {
   }
 
   display() {
-    this.m += 0.03; //modifica velocità di modifica di scala e di cambio colore
+    this.m += 0.03; //velocità di scala e di cambio colore
     let scale = this.r + sin(this.m) * 3;
     noStroke();
     fill(random(starColor));
@@ -87,7 +92,6 @@ class Star {
 }
 
 //NUVOLE
-
 const inc = 0.01;
 let start = 0;
 
@@ -99,6 +103,7 @@ function drawClouds() {
     yPoints.push(noise(off) * height * 0.6);
     off += inc;
   }
+
   drawingContext.filter = "blur(15px)";
   push();
   stroke("white");
