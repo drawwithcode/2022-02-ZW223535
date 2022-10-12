@@ -50,16 +50,16 @@ function draw() {
   noFill();
   stroke("white");
   strokeWeight(2);
-  rect(width / 2, height / 2 - 5, 200, 70);
+  rect(width / 2, height / 2 - 5, 230, 70);
   pop();
 
   //Scritta
   push();
   let myText = "Click to chage the SKY.";
-  textFont("Agency FB");
+  textFont("Roboto Mono");
   textStyle(ITALIC);
   fill("White");
-  textSize(20);
+  textSize(15);
   textAlign(CENTER);
   text(myText, width / 2, height / 2);
   pop();
